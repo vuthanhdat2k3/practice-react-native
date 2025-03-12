@@ -1,6 +1,9 @@
 import type React from "react"
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, SafeAreaView, TextInput } from "react-native"
 import { Ionicons, MaterialIcons } from "@expo/vector-icons"
+import { useState } from "react"
+import MenuBar from "@/components/MenuBar"
+import SideMenu from "@/components/SideMenu"
 
 interface CategoryItemProps {
   title: string
@@ -18,8 +21,12 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ title, imageSource }) => {
 }
 
 export default function DiscoverScreen() {
+  const [menuVisible, setMenuVisible] = useState(false)
     return (
       <SafeAreaView style={styles.container}>
+        <MenuBar title="Discover" onMenuPress={() => setMenuVisible(true)} />
+
+        <SideMenu isVisible={menuVisible} onClose={() => setMenuVisible(false)} />
         {/* Search Bar */}
         <View style={styles.searchContainer}>
           <Ionicons name="search" size={20} color="#777" style={styles.searchIcon} />
